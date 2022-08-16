@@ -4,10 +4,13 @@
  */
 import API from '../../api/loveMsg'
 import { wxNotify } from '../WxNotify'
+import { getConfig } from '../../utils/getConfig'
 import { newsTemplate } from './templates/news'
 
+const CONFIG = getConfig().loveMsg
+
 // 获取新闻
-const getNews = async() => {
+const getNews = async () => {
   try {
     // 每日简报
     // const dailyBriefing = await API.getDailyBriefing()
@@ -30,14 +33,13 @@ const getNews = async() => {
     if (len >= 16) {
       // 则这条接口满足条件 2 * 8 = 16
       result = todayTopNews.slice(0, 16)
-    }
-    else {
+    } else {
       // 取 0- 8 条
       result = todayTopNews.slice(0, len >= 8 ? 8 : len)
       // 数据不够，请求另一个接口
       const dailyBriefing = await API.getDailyBriefing()
       console.log('dailyBriefing', dailyBriefing.length)
-      const formateData: TodayHeadlines[] = dailyBriefing.map(n => ({
+      const formateData: TodayHeadlines[] = dailyBriefing.map((n) => ({
         ...n,
         title: n.title,
         description: n.digest,
@@ -56,10 +58,8 @@ const getNews = async() => {
       // 少于 8 条数据的情况
       if (result.length < 8) {
         const sencondLen = result.length + formateData.length
-        if (sencondLen >= 16)
-          result = [...result, ...formateData.slice(result.length, 16)]
-        else
-          result = [...result, ...formateData.slice(result.length, formateData.length)]
+        if (sencondLen >= 16) result = [...result, ...formateData.slice(result.length, 16)]
+        else result = [...result, ...formateData.slice(result.length, formateData.length)]
       }
     }
 
@@ -73,19 +73,18 @@ const getNews = async() => {
       const template = newsTemplate(result.slice(start, end))
       await wxNotify(template)
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log('goodEvening', error)
   }
 }
 
 // 获今日取故事
-const getStory = async() => {
+const getStory = async () => {
   const res = await API.getStorybook()
   const template = {
     msgtype: 'text',
     text: {
-      content: `给鱼崽的今日份睡前故事来喽：
+      content: `给${CONFIG.girl_name}的今日份睡前故事来喽：
 🌑🌒🌓🌔🌕🌝😛\n
 『${res.title}』
 ${res.content}`,
@@ -96,7 +95,7 @@ ${res.content}`,
 }
 
 // 执行函数
-export const goodEvening = async() => {
+export const goodEvening = async () => {
   await getStory()
   await getNews()
 }
