@@ -97,5 +97,4 @@ ${res.content}`,
 // 执行函数
 export const goodEvening = async () => {
   await getStory()
-  await getNews()
 }
