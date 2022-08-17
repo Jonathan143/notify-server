@@ -17,8 +17,7 @@ export async function getToken({ id, secret }: IReqToken): Promise<string> {
       },
     })
     return response.data.access_token
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error)
     return ''
   }
