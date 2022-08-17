@@ -9,7 +9,7 @@ loveMsg:
   # 对女朋友的爱称
   girl_name: 小祖宗
   # 对自己的称呼
-  boy_name: 爸爸
+  boy_name: 你的男孩
   # 点击卡片详情地址
   card_url: https://api.vvhan.com/api/60s
   # 天气生活指数提示（默认开启）
