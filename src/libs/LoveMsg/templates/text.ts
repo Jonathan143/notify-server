@@ -21,7 +21,7 @@ export const textTemplate = (data: TextTemplateProps) => {
 嗯哼哼~今天可是${week}哦，上班别迟到了哦~`
   } else {
     text += `
-如果我${CONFIG.girl_name}还没起床呀！${CONFIG.boy_name}就等着${CONFIG.girl_name}起床给我说早安呦🤣
+如果我${CONFIG.girl_name}还没起床呀！${CONFIG.boy_name}就等着${CONFIG.girl_name}起床给他说早安呦🤣
 嗯哼~，既然今天是${week}，就让你再睡会懒觉~下次可不能啦~😝\n`
   }
 
