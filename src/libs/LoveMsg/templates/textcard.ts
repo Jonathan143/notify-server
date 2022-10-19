@@ -34,6 +34,7 @@ export const textCardTemplate = (data: TextCardTemplateProps) => {
   // 今日、恋爱天数
   const today = `${date.replace('-', '年').replace('-', '月')}日`
   const dateLength = dayjs(date).diff(CONFIG.start_stamp, 'day') + 1
+  const loveDays = dayjs(date).diff(CONFIG.love_stamp, 'day') + 1
 
   // 拼接内容
   let description = `${area} | ${today} | ${week}`
@@ -84,10 +85,8 @@ ${CONFIG.girl_name}可要注意保暖哦~\n`
   //   }
 
   // 内容末尾，自定义
-  description += `
-  [ 点我有惊喜 ] ❤️ 🧡 💛 💚 💖`
 
-  const title = `这是我们相识的第 ${dateLength} 天`
+  const title = `这是我们相识的第 ${dateLength} 天，相恋的第 ${loveDays} 天`
 
   return {
     msgtype: 'textcard',
